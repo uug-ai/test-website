@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>uug.ai — AI Video Surveillance</title>
+  <meta name="description" content="AI video surveillance that spots what humans miss. Real-time detection, smart alerts, and searchable footage." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --bg-2:#0f141c;
+      --surface:#111721;
+      --surface-2:#161d2a;
+      --border:#232a36;
+      --text:#e6edf3;
+      --muted:#a2b1c3;
+      --accent:#6ee7ff;
+      --accent-2:#7c5cff;
+      --glow:0 0 30px rgba(110,231,255,0.35);
+      --radius:18px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      background:radial-gradient(1200px 600px at 70% -10%, rgba(124,92,255,0.25), transparent 50%),
+                 radial-gradient(1000px 500px at 10% -20%, rgba(110,231,255,0.2), transparent 50%),
+                 var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+    header{
+      position:sticky;top:0;z-index:10;
+      background:linear-gradient(to bottom, rgba(11,15,20,0.9), rgba(11,15,20,0.6));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(35,42,54,0.5);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      height:72px;
+    }
+    .logo{font-family:Sora;font-weight:700;letter-spacing:0.3px}
+    .nav-links{display:flex;gap:24px;color:var(--muted);font-weight:500}
+    .btn{
+      padding:12px 18px;border-radius:12px;border:1px solid var(--border);
+      font-weight:600;display:inline-flex;align-items:center;gap:10px
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#0b0f14;border:none;box-shadow:var(--glow);
+    }
+    .hero{padding:96px 0 40px}
+    .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
+    h1{font-family:Sora;font-size:52px;line-height:1.05;margin:0 0 16px}
+    .subhead{font-size:18px;color:var(--muted);max-width:560px}
+    .hero-ctas{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;padding:6px 12px;
+      border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:13px
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(17,23,33,0.9), rgba(17,23,33,0.7));
+      border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:0 20px 80px rgba(0,0,0,0.45);
+      position:relative;overflow:hidden
+    }
+    .hero-card:before{
+      content:"";position:absolute;inset:-40% -10% auto auto;width:220px;height:220px;
+      background:radial-gradient(circle, rgba(110,231,255,0.4), transparent 60%);filter:blur(10px);
+    }
+    .grid{display:grid;gap:20px}
+    .logos{margin:30px 0 10px;color:var(--muted);font-size:14px}
+    .logo-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+    .logo-box{height:36px;border:1px dashed var(--border);border-radius:10px;opacity:.6}
+    section{padding:64px 0}
+    .section-title{font-family:Sora;font-size:32px;margin:0 0 10px}
+    .section-sub{color:var(--muted);max-width:700px}
+    .card{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px
+    }
+    .card h3{margin:0 0 8px;font-family:Sora}
+    .features{grid-template-columns:repeat(3,1fr)}
+    .steps{grid-template-columns:repeat(3,1fr)}
+    .usecases{grid-template-columns:repeat(4,1fr)}
+    .security{
+      background:linear-gradient(180deg, rgba(17,23,33,0.8), rgba(17,23,33,0.5));
+      border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:flex;gap:20px;align-items:center
+    }
+    .cta-band{
+      background:linear-gradient(135deg, rgba(110,231,255,0.15), rgba(124,92,255,0.2));
+      border:1px solid var(--border);border-radius:var(--radius);padding:36px;display:flex;align-items:center;justify-content:space-between;gap:20px
+    }
+    footer{padding:40px 0;color:var(--muted);border-top:1px solid var(--border)}
+    .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}
+
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .features,.steps{grid-template-columns:repeat(2,1fr)}
+      .usecases{grid-template-columns:repeat(2,1fr)}
+      h1{font-size:44px}
+    }
+    @media (max-width: 640px){
+      .features,.steps,.usecases{grid-template-columns:1fr}
+      .nav-links{display:none}
+      h1{font-size:38px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">uug.ai</div>
+      <nav class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#features">Features</a>
+        <a href="#usecases">Use cases</a>
+        <a href="#security">Security</a>
+      </nav>
+      <a class="btn primary" href="#cta">Request a demo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">AI Video Surveillance • Real‑time Detection</div>
+          <h1>AI video surveillance that spots what humans miss.</h1>
+          <p class="subhead">uug.ai delivers real‑time detection, smart alerts, and searchable footage—so you can protect spaces with clarity and speed.</p>
+          <div class="hero-ctas">
+            <a class="btn primary" href="#cta">Request a demo</a>
+            <a class="btn" href="#features">View platform</a>
+          </div>
+          <div class="logos">Trusted by forward‑thinking security teams</div>
+          <div class="logo-row">
+            <div class="logo-box"></div><div class="logo-box"></div><div class="logo-box"></div><div class="logo-box"></div><div class="logo-box"></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="grid" style="gap:14px">
+            <div class="card" style="background:var(--surface-2)">
+              <div style="font-weight:600">Live Incident Feed</div>
+              <div style="color:var(--muted);font-size:14px">Person detected • Zone 3</div>
+            </div>
+            <div class="card" style="background:var(--surface-2)">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-weight:600">Risk Alerts</div>
+                <span class="pill" style="border-color:rgba(110,231,255,0.4);color:var(--text)">Active</span>
+              </div>
+              <div style="color:var(--muted);font-size:14px">Vehicle entered after hours</div>
+            </div>
+            <div class="card" style="background:var(--surface-2)">
+              <div style="font-weight:600">Search Footage</div>
+              <div style="color:var(--muted);font-size:14px">"Red truck at loading dock"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="product">
+      <div class="container">
+        <h2 class="section-title">Why teams choose uug.ai</h2>
+        <p class="section-sub">Faster response, fewer false alarms, and instant access to critical moments.</p>
+        <div class="grid features" style="margin-top:24px">
+          <div class="card"><h3>Real‑time detection</h3><p class="section-sub">Detect motion, anomalies, and objects with low‑latency AI.</p></div>
+          <div class="card"><h3>Smart alerts</h3><p class="section-sub">Get only the events that matter—no noise, no spam.</p></div>
+          <div class="card"><h3>Searchable footage</h3><p class="section-sub">Find incidents in seconds using natural language search.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">Platform features</h2>
+        <p class="section-sub">Enterprise‑grade tooling for modern surveillance teams.</p>
+        <div class="grid features" style="margin-top:24px">
+          <div class="card"><h3>Multi‑camera monitoring</h3><p class="section-sub">Unified view across sites, floors, and zones.</p></div>
+          <div class="card"><h3>AI object detection</h3><p class="section-sub">People, vehicles, packages, and custom objects.</p></div>
+          <div class="card"><h3>Incident timeline</h3><p class="section-sub">Review and annotate events in a clean timeline.</p></div>
+          <div class="card"><h3>Zones & rules</h3><p class="section-sub">Define alert rules per zone and time window.</p></div>
+          <div class="card"><h3>Edge + cloud</h3><p class="section-sub">Deploy on‑prem or cloud with hybrid support.</p></div>
+          <div class="card"><h3>Audit logs</h3><p class="section-sub">Compliance‑ready access and retention policies.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">From setup to action in three steps.</p>
+        <div class="grid steps" style="margin-top:24px">
+          <div class="card"><h3>1) Connect cameras</h3><p class="section-sub">RTSP, NVR, and cloud sources supported.</p></div>
+          <div class="card"><h3>2) Configure rules</h3><p class="section-sub">Define zones, objects, and thresholds.</p></div>
+          <div class="card"><h3>3) Monitor & respond</h3><p class="section-sub">Get alerts and review incidents instantly.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="usecases">
+      <div class="container">
+        <h2 class="section-title">Use cases</h2>
+        <p class="section-sub">Built for the environments that need clarity most.</p>
+        <div class="grid usecases" style="margin-top:24px">
+          <div class="card"><h3>Warehouses</h3><p class="section-sub">Perimeter, loading docks, and inventory zones.</p></div>
+          <div class="card"><h3>Retail</h3><p class="section-sub">Theft prevention and after‑hours detection.</p></div>
+          <div class="card"><h3>Offices</h3><p class="section-sub">Access control and visitor tracking.</p></div>
+          <div class="card"><h3>Public safety</h3><p class="section-sub">City operations and critical infrastructure.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="security">
+      <div class="container security">
+        <div>
+          <h2 class="section-title" style="margin:0">Security & reliability</h2>
+          <p class="section-sub">Encrypted streams, role‑based access, and compliance‑ready audit trails.</p>
+        </div>
+        <a class="btn" href="#cta">Learn more</a>
+      </div>
+    </section>
+
+    <section id="cta">
+      <div class="container cta-band">
+        <div>
+          <h2 class="section-title" style="margin:0 0 8px">See every critical moment—automatically.</h2>
+          <p class="section-sub">Book a demo or talk to our team about your deployment.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn primary" href="mailto:hello@uug.ai">Request a demo</a>
+          <a class="btn" href="mailto:sales@uug.ai">Contact sales</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="logo">uug.ai</div>
+      <div class="footer-links">
+        <a href="#product">Product</a>
+        <a href="#usecases">Use cases</a>
+        <a href="#features">Features</a>
+        <a href="#security">Security</a>
+        <a href="#cta">Contact</a>
+      </div>
+      <div>© 2026 uug.ai. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
